@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-// fib returns a function that returns
-// successive Fibonacci numbers.
 func fib(n int) int {
 	if n == 0 {
 		return 0
