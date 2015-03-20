@@ -1,4 +1,6 @@
-import tornado.ioloop
+import sys
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
 import tornado.web
 
 def fib(n):
@@ -21,5 +23,9 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    application.listen(8888)
-    tornado.ioloop.IOLoop.instance().start()
+    num_proc = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    print("start tornado with {0} processes".format(num_proc))
+    server = HTTPServer(application)
+    server.bind(8888)
+    server.start(num_proc)
+    IOLoop.instance().start()
