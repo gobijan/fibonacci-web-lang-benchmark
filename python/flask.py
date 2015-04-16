@@ -1,4 +1,5 @@
 from flask import Flask
+from gevent.wsgi import WSGIServer
 app = Flask(__name__)
 
 @app.route('/<int:number>')
@@ -14,4 +15,4 @@ def fib(n):
         return fib(n - 1) + fib(n - 2)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+	WSGIServer(('127.0.0.1', 5000), app, None, 'default', None).serve_forever()
