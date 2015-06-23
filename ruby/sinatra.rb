@@ -1,4 +1,6 @@
+require 'thin'
 require 'sinatra'
+set :logging, false
 
 def fib(n)	
 	if n == 0
@@ -11,5 +13,5 @@ def fib(n)
 end
 
 get '/:number' do	
-	"#{fib(params[:number].to_i)}"
+	fib(params[:number].to_i).to_s
 end
