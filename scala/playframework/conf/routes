@@ -1,0 +1,2 @@
+#Call fibonacci
+GET    /:n                controllers.Application.findFib(n:Int)
