@@ -20,7 +20,11 @@ func fib(n int) int {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	n := strings.Trim(r.URL.Path, "/")
-	number, _ := strconv.Atoi(n)
+	number, err := strconv.Atoi(n)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusBadRequestint), http.StatusBadRequest)
+		return
+	}
 	fmt.Fprintln(w, fib(number))
 }
 
