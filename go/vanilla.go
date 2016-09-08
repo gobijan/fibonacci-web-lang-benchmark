@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"runtime"
 	"strconv"
 	"strings"
 )
@@ -22,15 +21,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	n := strings.Trim(r.URL.Path, "/")
 	number, err := strconv.Atoi(n)
 	if err != nil {
-		http.Error(w, http.StatusText(http.StatusBadRequestint), http.StatusBadRequest)
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
 	fmt.Fprintln(w, fib(number))
 }
 
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU() - 1) // one core for wrk
-
 	http.HandleFunc("/", indexHandler)
 	http.ListenAndServe(":4000", nil)
 	fmt.Println("Fin Bench running on Port 4000")
